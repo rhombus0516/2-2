@@ -16,23 +16,27 @@
   </div><!-- wrapper -->
 
   <script>
+    box.addEventListener('click', function(){
+
+    
     const element = document.getElementById("box");
     function slideAnimation(element, direction, distance, duration) {
       let position = 0
       function slide() {
       position += 1; 
       if (position < distance) {
-        if (direction === "rightdown") {
-          element.style.transform = `translate(${position}px, ${position}px)`;
+          if (direction === "rightdown") {
+            element.style.transform = `translate(${position}px, ${position}px)`;
+          }
+        } else {
+          clearInterval(slide);
         }
-      } else {
-        clearInterval(slide);
-      }
       }
         setInterval(slide, duration);
       }
         slideAnimation(element, "rightdown", 300, 1);
-
+      }); 
+      
       function reset() {
         element.style.transform = "none";
       }
