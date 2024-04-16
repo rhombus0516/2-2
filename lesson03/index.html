@@ -16,8 +16,41 @@
   </div><!-- wrapper -->
 
   <script>
-    function fadeAnimation() {
+    const targetElement = document.getElementById("button");
+    const image = document.getElementById("image");
+    targetElement.style.transition = "opacity 1s";
+
+    button.addEventListener("click", function(){
+      if(image.style.display != 'none') {
+        fadeOut(image);
+        button.textContent = "フェードイン";
+      }else{
+        fadeIn(image);
+        button.textContent = "フェードアウト";
+      }
+    });
+    let sw = 0;
+    function fadeSwitch(){
+      if(sw == 1){
+        fadeIn();
+        sw = 0;
+      }else if(sw == 0){
+        fadeOut();
+        sw = 1;
+      } 
     }
+
+    function fadeIn(){
+      image.style.transition = "opacity 2s";
+      image.style.opacity = "1";
+    }
+
+    function fadeOut(){
+      image.style.opacity = "0";
+    }
+
+    setInterval(fadeSwitch, 2000);
+  
   </script>
 </body>
 
