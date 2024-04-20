@@ -17,11 +17,38 @@
   </div><!-- wrapper -->
 
   <script>
-    function pageTop() {
-    }
 
-    function fadeAnimation(flg) {
+    document.addEventListener('DOMContentLoaded', function() {
+    let pageTop = document.getElementById('page-top');
+
+    pageTop.addEventListener('click', function(event) {
+        event.preventDefault();
+        scrollToTop(800);
+    });
+
+    function scrollToTop(duration) {
+        let start = window.pageYOffset;
+        let startTime = performance.now();
+
+        function scrollStep(timestamp) {
+            let progress = timestamp - startTime;
+            let scrollY = easeInOutCubic(progress, start, -start, duration);
+            window.scrollTo(0, scrollY);
+            if (progress < duration) {
+                requestAnimationFrame(scrollStep);
+            }
+        }
+
+        function easeInOutCubic(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t * t + b;
+            t -= 2;
+            return c / 2 * (t * t * t + 2) + b;
+        }
+
+        requestAnimationFrame(scrollStep);
     }
+});
   </script>
 </body>
 
